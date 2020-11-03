@@ -4,9 +4,19 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { createMuiTheme, MuiThemeProvider, ThemeProvider } from '@material-ui/core/styles';
+
+const THEME = createMuiTheme({
+  typography: {
+    "fontFamily": "IBM Plex Sans"
+  }
+})
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <MuiThemeProvider theme={THEME}>
+      <App />
+    </MuiThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
