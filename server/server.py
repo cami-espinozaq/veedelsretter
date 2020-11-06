@@ -2,8 +2,9 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 from data import Retailers
 import requests
+import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='./client/build', static_url_path='/')
 CORS(app)
 
 def init_data():
@@ -14,8 +15,12 @@ def init_data():
 retailers = init_data()
 
 @app.route('/')
-def main():
-    return 'Hello, world!'
+def index():
+    return app.send_static_file('index.html')
+
+@app.errorhandler(404)
+def not_found(e):
+    return app.send_static_file('index.html')
 
 @app.route('/names-list')
 def raw_data():
@@ -44,3 +49,6 @@ def compare():
         'countGraph': average['counting'],
         'ranking': ranking
     })
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', debug=False, port=os.environ.get('PORT', 80))
