@@ -23,8 +23,13 @@ const RetailerKPIs = params => {
     const [retailersList, setRetailersList] = useState([]);
 
     const fetchRetailer = async (id) => {
-        const result = await axios(`http://localhost:5000/overview/${id}`);
-        setRetailer(result.data);
+        try {
+            const result = await axios(`http://localhost:5000/overview/${id}`);
+            setRetailer(result.data);
+        } catch (error) {
+            console.log(error);
+        }
+        
     }
 
     const handleRetailerChange = (retailerId) => {
@@ -37,8 +42,13 @@ const RetailerKPIs = params => {
     };
 
     const fetchList = async () => {
-      const result = await axios('http://localhost:5000/names-list');
-      setRetailersList(result.data);
+        try {
+            const result = await axios('http://localhost:5000/names-list');
+            setRetailersList(result.data);
+        } catch (error) {
+            console.log(error);
+        }
+      
     }
   
     useEffect(() => {
@@ -80,14 +90,17 @@ const RetailerKPIs = params => {
         <Grid item sm={4} xs={12}>
           <Paper elevation={4}>
             <Box display="flex" flexDirection="column" padding="20px" 
-            justifyContent="space-between" height={retailer ? 'calc(100% - 40px)' : 'unset'}>
+            justifyContent="space-between" maxHeight={retailer ? 'calc(100% - 40px)' : 'unset'}>
+                <Typography variant="h4" className="grid-item__title">Retailer relevant KPIs</Typography>
                 <Box>
-                    <Typography variant="h4" className="grid-item__title">
-                        Retailer relevant KPIs
+                    <Typography variant="h5" style={{ fontStyle: 'italic', margin: '20px 0' }}>
+                        Please select a retailer to see both their main KPIs and their performance compared to the average of all approved retailers so far. 
                     </Typography>
+                    <br />
                     <RetailerSelect list={retailersList} onChangeCallback={handleRetailerChange} />
+                    <br />
+                    {retailer ? retailerView(retailer) : chooseRetailerView}
                 </Box>
-                {retailer ? retailerView(retailer) : chooseRetailerView}
             </Box>
           </Paper>
         </Grid>

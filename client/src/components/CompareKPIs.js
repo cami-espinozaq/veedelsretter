@@ -22,28 +22,32 @@ const CompareKPIs = params => {
     const [vouchersData, setVouchersData] = useState([]);
     const [rankingData, setRankingData] = useState(null);
     const id = params.retailerId;
-
-    const fetchData = async () => {
-      const result = await axios(`http://localhost:5000/compare`, {params: {id: id}});
-      const formattedRev = formatData(result.data.revenueGraph, 'donations', 'vouchersAmount');
-      const formattedVouchers = formatData(result.data.countGraph, 'pendingVouchers', 'redeemedVouchers');
-      
-      setrevenueData(formattedRev);
-      setVouchersData(formattedVouchers);
-      setRankingData(result.data.ranking);
-    }
   
     useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const result = await axios(`http://localhost:5000/compare`, {params: {id: id}});
+                const formattedRev = formatData(result.data.revenueGraph);
+                const formattedVouchers = result.data.countGraph;
+                
+                setrevenueData(formattedRev);
+                setVouchersData(formattedVouchers);
+                setRankingData(result.data.ranking);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
         fetchData();
     }, [id]);
 
-    const floatCurrency = (number) => Math.round(number / 100);
     const toRanking = (number => `#${number}`)
 
     const formatData = (rData) => rData.map((item) => {
-        for (let k in rData) {
+        for (let k in item) {
+            console.log(k);
             if (k !== 'key') {
-                item[k] = floatCurrency(item[k])
+                item[k] = Math.round(item[k]) / 100
             }
         }
         return item

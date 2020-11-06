@@ -53,7 +53,7 @@ class Retailers():
 
         donations = _sum_all('soli')
         sold = _sum_all('amount') - donations
-        avg_per_order = (sold / _sum_all('orders_count'))
+        avg_per_order = (_sum_all('amount') / _sum_all('orders_count'))
 
         return {
             'vouchersSold': _sum_all('voucher_count'),

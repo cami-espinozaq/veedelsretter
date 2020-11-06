@@ -7,7 +7,7 @@ import { TextField } from '@material-ui/core';
 
 const RetailerSelect = params => {
 
-    const [retailer, setRetailer] = useState('');
+    const [, setRetailer] = useState('');
 
     const handleNameChange = (e, newValue) => {
         setRetailer(newValue);

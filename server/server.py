@@ -44,9 +44,3 @@ def compare():
         'countGraph': average['counting'],
         'ranking': ranking
     })
-
-@app.route('/test/<int:id>')
-def comparet(id):
-    result = retailers.retailer_ranking(id)
-    return jsonify(result)
-

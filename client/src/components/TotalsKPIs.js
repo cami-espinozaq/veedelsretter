@@ -22,8 +22,12 @@ const TotalsKPIs = params => {
     const [totals, setTotals] = useState(null);
 
     const fetchData = async () => {
-      const result = await axios('http://localhost:5000/overview');
-      setTotals(result.data);
+      try {
+        const result = await axios('http://localhost:5000/overview');
+        setTotals(result.data);
+      } catch (error) {
+        console.log(error);
+      }
     }
   
     useEffect(() => {
@@ -45,7 +49,7 @@ const TotalsKPIs = params => {
                 <ValueAxis />
                 <LineSeries valueField="value" argumentField="date" color="#1F628C" name="week number (2020)" />
                 <Legend position="bottom" />
-                <Title text="Number of retailers approved weekly" />
+                <Title text="Number of new retailers approved weekly" />
                 <EventTracker />
                 <Tooltip />
             </Chart>

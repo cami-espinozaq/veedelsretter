@@ -58,7 +58,6 @@ background very light blue: #f0f9fe*/
 
 .kpiBox {
   font-variant: all-petite-caps;
-  flex-wrap: wrap-reverse;
 }
 
 .kpiBox:last-child {
