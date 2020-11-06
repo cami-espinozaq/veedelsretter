@@ -21,7 +21,7 @@ class Retailers():
     def _parse_data(self):
         retailers = {}
 
-        for i, r in enumerate(self.raw_data):
+        for i, r in enumerate(self.raw_data, 1):
             retailers[i] = Retailer(
                 id=i,
                 name=r.get('name'),
@@ -123,10 +123,11 @@ class Retailers():
             return totals_data
 
         retailer_info = self.retailers.get(int(id))
+        print(retailer_info)
         r_donations = retailer_info.soli
         r_amount = retailer_info.amount - r_donations
-        r_redeemed_vouchers = retailer_info.redeemed_voucher_count
-        r_pending_vouchers = retailer_info.voucher_count - r_redeemed_vouchers
+        r_redeemed_vouchers = retailer_info.redeemed_voucher_count or 0
+        r_pending_vouchers = (retailer_info.voucher_count or 0) - r_redeemed_vouchers
 
         totals_data['revenue'].append({
             'key': retailer_info.name, 
@@ -147,15 +148,15 @@ class Retailers():
         id = int(id)
 
         total_amount = sorted(r_list, key=lambda r: r.amount, reverse=True)
-        ranking = next((index for (index, r) in enumerate(total_amount) if r.id == id))
+        ranking = next((index for (index, r) in enumerate(total_amount, 1) if r.id == id))
         rankings['totalAmount'] = ranking
 
         voucher_amount = sorted(r_list, key=lambda r: r.amount - r.soli, reverse=True)
-        ranking = next((index for (index, r) in enumerate(voucher_amount) if r.id == id))
+        ranking = next((index for (index, r) in enumerate(voucher_amount, 1) if r.id == id))
         rankings['voucherAmount'] = ranking
 
         soli_amount = sorted(r_list, key=lambda r: r.soli, reverse=True)
-        ranking = next((index for (index, r) in enumerate(soli_amount) if r.id == id))
+        ranking = next((index for (index, r) in enumerate(soli_amount, 1) if r.id == id))
         rankings['donations'] = ranking
 
         return rankings
