@@ -31,6 +31,6 @@ IMPORTANT: you can run the whole app from this server, **only if the app is buil
 
 2. run react (node) server:
 
-npm start
+``` npm start ```
 
 node server runs at http://localhost:3000
