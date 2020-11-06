@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 from data import Retailers
 import requests
@@ -33,3 +33,20 @@ def overview():
 def retailer_overview(id):
     result = retailers.overview_by_id(id) or {'msg': 'id does not exist'}
     return jsonify(result)
+
+@app.route('/compare')
+def compare():
+    id = request.args.get('id')
+    average = retailers.compare_to_average(id)
+    ranking = retailers.retailer_ranking(id) if id else None
+    return jsonify({
+        'revenueGraph': average['revenue'],
+        'countGraph': average['counting'],
+        'ranking': ranking
+    })
+
+@app.route('/test/<int:id>')
+def comparet(id):
+    result = retailers.retailer_ranking(id)
+    return jsonify(result)
+

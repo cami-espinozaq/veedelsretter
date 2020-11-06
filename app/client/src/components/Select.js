@@ -1,36 +1,29 @@
 import React, { useState } from 'react';
 
-import Container from '@material-ui/core/Container';
-
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 import './Select.css';
+import { TextField } from '@material-ui/core';
 
 const RetailerSelect = params => {
 
-    const [name, setName] = useState('');
+    const [retailer, setRetailer] = useState('');
 
-    const handleNameChange = (e) => {
-      setName(e.target.value);
+    const handleNameChange = (e, newValue) => {
+        setRetailer(newValue);
+        params.onChangeCallback(newValue ? newValue.id : null);
     }
 
     return (
-        <FormControl variant="filled" className="retailer-select__form">
-            <InputLabel id="retailer-select-label">Select Retailer</InputLabel>
-            <Select
-                labelId="retailer-select-label"
-                id="retailer-select"
-                value={name}
-                onChange={handleNameChange}
-            >
-                <MenuItem value={1}>Retailer 1</MenuItem>
-                <MenuItem value={2}>Retailer 2</MenuItem>
-            </Select>
-        </FormControl>
+        <Autocomplete
+            id="retailer-select"
+            options={params.list}
+            getOptionLabel={(option) => option.name}
+            onChange={handleNameChange}
+            renderInput={(params) => 
+                <TextField {...params} label="Select Retailer" variant="outlined" className="retailer-select__form" />
+            } 
+        />
     );
 };
 

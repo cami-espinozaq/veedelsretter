@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import { createMuiTheme, MuiThemeProvider, ThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core/styles';
 
 const THEME = createMuiTheme({
   typography: {
@@ -13,11 +13,9 @@ const THEME = createMuiTheme({
 })
 
 ReactDOM.render(
-  <React.StrictMode>
     <MuiThemeProvider theme={THEME}>
       <App />
-    </MuiThemeProvider>
-  </React.StrictMode>,
+    </MuiThemeProvider>,
   document.getElementById('root')
 );
 

@@ -30,6 +30,10 @@
   margin: 20px;
 }
 
+.main-grid .MuiPaper-root {
+  height: 100%;
+}
+
 .MuiTypography-root.grid-item__title {
   margin-bottom: 20px;
 }
@@ -49,7 +53,13 @@
 
 /* light-blue: #a4d0eb;
 green: #57b895;
-dark-blue: ##001f42; */
+dark-blue: ##001f42; 
+background very light blue: #f0f9fe*/
+
+.kpiBox {
+  font-variant: all-petite-caps;
+  flex-wrap: wrap-reverse;
+}
 
 .kpiBox:last-child {
   margin-bottom: 0;
@@ -63,4 +73,9 @@ dark-blue: ##001f42; */
 .kpiBox--lightBlue {
   background-color: #a4d0eb;
   color: #1F628C;
+}
+
+.kpiBox--yellow {
+  background-color: #EBE2A2;
+  color: #745B1A;
 }
