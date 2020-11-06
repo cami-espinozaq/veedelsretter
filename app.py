@@ -4,7 +4,7 @@ from data import Retailers
 import requests
 import os
 
-app = Flask(__name__, static_folder='./build', static_url_path='/')
+app = Flask(__name__, static_folder='build', static_url_path='')
 CORS(app)
 
 def init_data():
