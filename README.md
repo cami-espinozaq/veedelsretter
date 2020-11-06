@@ -1,12 +1,36 @@
-# Getting Started with Create React App
+# Veedelsretter app
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-Server side was made with Python + Flask.
+This is a Flask + React project. The react proyect was built with ``` create react app ```
 
-To run on deployment: 
-localhost:5000
 
-run:
+## before running project
+
+1. flask server:
+
+- install flask and python3
+- create a virtual enviroment
+- install all necessary packages from *requirements.txt* by running: ``` pip install -r requirements.txt ```
+
+2. node server:
+
+- install node.js
+- run ``` npm install ``` inside the folder to install all packages
+
+## to run on deployment
+
+1. run flask server:
+
+```
 export FLASK_DEV=deployment
-xport FLASK_APP=$PWD/app
+export FLASK_APP=$PWD/app
 flask run
+```
+flask server runs at http://localhost:5000
+
+IMPORTANT: you can run the whole app from this server, **only if the app is built first**, by running ``` npm run build ``` before starting the server.
+
+2. run react (node) server:
+
+npm start
+
+node server runs at http://localhost:3000
