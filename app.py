@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 from data import Retailers
 import requests
@@ -16,11 +16,19 @@ retailers = init_data()
 
 @app.route('/')
 def index():
-    return app.send_static_file('index.html')
+    return send_from_directory(app.static_folder, 'index.html')
 
 @app.errorhandler(404)
 def not_found(e):
-    return app.send_static_file('index.html')
+    return send_from_directory(app.static_folder, 'index.html')
+
+
+@app.route("/<path:path>")
+def static_proxy(path):
+    file_name = path.split("/")[-1]
+    dir_name = os.path.join(app.static_folder, "/".join(path.split("/")[:-1]))
+    return send_from_directory(dir_name, file_name)
+
 
 @app.route('/names-list')
 def raw_data():
