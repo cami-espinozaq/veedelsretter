@@ -27,8 +27,8 @@ const CompareKPIs = params => {
         const fetchData = async () => {
             try {
                 const result = await axios(`${process.env.REACT_APP_API_URL}/compare`, {params: {id: id}});
-                const formattedRev = formatData(result.data.revenueGraph);
-                const formattedVouchers = result.data.countGraph;
+                const formattedRev = result.data ? formatData(result.data.revenueGraph) : [];
+                const formattedVouchers = result.data ? result.data.countGraph: [];
                 
                 setrevenueData(formattedRev);
                 setVouchersData(formattedVouchers);

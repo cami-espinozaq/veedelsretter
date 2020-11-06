@@ -44,7 +44,7 @@ const TotalsKPIs = params => {
             <KpiBox kpiStyle="kpiBox--lightBlue" number={totals.vouchersRedeemed} title="Number of vouchers redeemed">
                 <RedeemIcon style={{ fontSize: 80 }} />
             </KpiBox>
-            <Chart data={totals.approvalValues} height="350">
+            <Chart data={totals.approvalValues || []} height="350">
                 <ArgumentAxis />
                 <ValueAxis />
                 <LineSeries valueField="value" argumentField="date" color="#1F628C" name="week number (2020)" />
