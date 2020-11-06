@@ -21,15 +21,15 @@ const RetailerKPIs = params => {
 
     const [retailer, setRetailer] = useState(null);
     const [retailersList, setRetailersList] = useState([]);
+    const baseURL = process.env.REACT_APP_API_URL || '';
 
     const fetchRetailer = async (id) => {
         try {
-            const result = await axios(`${process.env.REACT_APP_API_URL}/overview/${id}`);
+            const result = await axios(`${baseURL}/overview/${id}`);
             setRetailer(result.data);
         } catch (error) {
             console.log(error);
         }
-        
     }
 
     const handleRetailerChange = (retailerId) => {
@@ -40,20 +40,19 @@ const RetailerKPIs = params => {
         }
         params.selectedCallback(retailerId);
     };
-
-    const fetchList = async () => {
-        try {
-            const result = await axios(`${process.env.REACT_APP_API_URL}/names-list`);
-            setRetailersList(result.data);
-        } catch (error) {
-            console.log(error);
-        }
-      
-    }
   
     useEffect(() => {
-      fetchList();
-    }, []);
+        const fetchList = async () => {
+            try {
+                const result = await axios(`${baseURL}/names-list`);
+                setRetailersList(result.data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        fetchList();
+    }, [baseURL]);
 
     const toCurrency = (number) => `${(number / 100).toFixed(2)} €`;
 

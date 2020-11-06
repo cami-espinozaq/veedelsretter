@@ -26,7 +26,9 @@ const CompareKPIs = params => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const result = await axios(`${process.env.REACT_APP_API_URL}/compare`, {params: {id: id}});
+
+                const baseURL = process.env.REACT_APP_API_URL || '';
+                const result = await axios(`${baseURL}/compare`, {params: {id: id}});
                 const formattedRev = result.data ? formatData(result.data.revenueGraph) : [];
                 const formattedVouchers = result.data ? result.data.countGraph: [];
                 
