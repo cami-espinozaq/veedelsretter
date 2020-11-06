@@ -26,7 +26,7 @@ const CompareKPIs = params => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const result = await axios(`http://localhost:5000/compare`, {params: {id: id}});
+                const result = await axios(`${process.env.REACT_APP_API_URL}/compare`, {params: {id: id}});
                 const formattedRev = formatData(result.data.revenueGraph);
                 const formattedVouchers = result.data.countGraph;
                 
@@ -45,7 +45,6 @@ const CompareKPIs = params => {
 
     const formatData = (rData) => rData.map((item) => {
         for (let k in item) {
-            console.log(k);
             if (k !== 'key') {
                 item[k] = Math.round(item[k]) / 100
             }

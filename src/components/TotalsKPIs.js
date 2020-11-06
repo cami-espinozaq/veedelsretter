@@ -23,7 +23,7 @@ const TotalsKPIs = params => {
 
     const fetchData = async () => {
       try {
-        const result = await axios('http://localhost:5000/overview');
+        const result = await axios(`${process.env.REACT_APP_API_URL}/overview`);
         setTotals(result.data);
       } catch (error) {
         console.log(error);

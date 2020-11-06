@@ -24,7 +24,7 @@ const RetailerKPIs = params => {
 
     const fetchRetailer = async (id) => {
         try {
-            const result = await axios(`http://localhost:5000/overview/${id}`);
+            const result = await axios(`${process.env.REACT_APP_API_URL}/overview/${id}`);
             setRetailer(result.data);
         } catch (error) {
             console.log(error);
@@ -43,7 +43,7 @@ const RetailerKPIs = params => {
 
     const fetchList = async () => {
         try {
-            const result = await axios('http://localhost:5000/names-list');
+            const result = await axios(`${process.env.REACT_APP_API_URL}/names-list`);
             setRetailersList(result.data);
         } catch (error) {
             console.log(error);
