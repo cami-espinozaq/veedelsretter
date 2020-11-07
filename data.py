@@ -123,7 +123,6 @@ class Retailers():
             return totals_data
 
         retailer_info = self.retailers.get(int(id))
-        print(retailer_info)
         r_donations = retailer_info.soli
         r_amount = retailer_info.amount - r_donations
         r_redeemed_vouchers = retailer_info.redeemed_voucher_count or 0
